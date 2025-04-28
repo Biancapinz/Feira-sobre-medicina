@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="login.css">
+    <title>Acessibilidade / login</title>
+</head>
+<body>
+
+<!-- Botão de Acessibilidade -->
+<div class="acessibilidade">
+    <button onclick="toggleAcessibilidade()" class="acessibilidade-btn">
+        ♿ Acessibilidade
+    </button>
+    <div id="acessibilidade-opcoes" class="acessibilidade-opcoes" style="display: none;">
+        <button onclick="aumentarFonte()">A+</button>
+        <button onclick="diminuirFonte()">A-</button>
+        <button onclick="modoContraste()">Alto Contraste</button>
+    </div>
+</div>
+
+<div class="wrapper">
+    <nav class="nav">
+        <div class="nav-logo">
+            <p></p>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <ul>
+                <li><a href="#" class="link active">Login/cadastro</a></li>
+                <li><a href="inicial.html" class="link">Página inicial</a></li>
+                <li><a href="sobre.html" class="link">Sobre nosso site</a></li>
+                <li><a href="#" class="link">FAQ</a></li>
+            </ul>
+        </div>
+        <div class="nav-button">
+            <button class="btn white-btn" id="loginBtn" onclick="login()">Entrar</button>
+            <button class="btn" id="registerBtn" onclick="register()">Cadastre-se</button>
+        </div>
+        <div class="nav-menu-btn">
+            <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+        </div>
+    </nav>
+
+    <div class="form-box">
+        <div class="login-container" id="login">
+            <div class="top">
+                <span>Não tem uma conta? <a href="#" onclick="register()">Cadastre-se</a></span>
+                <header>Entre na sua conta!</header>
+            </div>
+            <div class="input-box">
+                <input type="text" class="input-field" placeholder="Usuário ou Email">
+                <i class="bx bx-user"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" class="input-field" placeholder="Senha" id="register-password">
+                <i class="bx bx-lock-alt"></i>
+                <label class="mostrar-senha">
+                    <input type="checkbox" onclick="toggleSenha()"> Mostrar senha
+                </label>
+            </div>
+            <div class="input-box">
+                <input type="submit" class="submit" value="Entrar">
+            </div>
+            <div class="two-col">
+                <div class="two">
+                    <label><a href="#">Esqueceu da senha?</a></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="register-container" id="register">
+            <div class="top">
+                <span>Tem uma conta? <a href="#" onclick="login()">Entrar</a></span>
+                <header>Crie sua conta</header>
+            </div>
+            <div class="two-forms">
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Nome">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Sobrenome">
+                    <i class="bx bx-user"></i>
+                </div>
+            </div>
+            <div class="input-box">
+                <input type="text" class="input-field" placeholder="Email">
+                <i class="bx bx-envelope"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" class="input-field" placeholder="Senha" id="register-password">
+                <i class="bx bx-lock-alt"></i>
+                <label class="mostrar-senha">
+                    <input type="checkbox" onclick="toggleSenha()"> Mostrar senha
+
+                </label>
+            </div>
+            <div class="input-box">
+                <input type="submit" class="submit" value="Criar conta">
+            </div>
+            <div class="input-box">
+                <a href="#" class="esqueci-senha">Esqueceu a senha?</a>
+            </div>
+            <div class="two-col">
+                <div class="one">
+                    <input type="checkbox" id="register-check">
+                    <label for="register-check"> Lembre de mim</label>
+                </div>
+                <div class="two">
+                    <label><a href="#">Termos e condições</a></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function myMenuFunction() {
+        var i = document.getElementById("navMenu");
+        if(i.className === "nav-menu") {
+            i.className += " responsive";
+        } else {
+            i.className = "nav-menu";
+        }
+    }
+
+    var a = document.getElementById("loginBtn");
+    var b = document.getElementById("registerBtn");
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+
+    function login() {
+        x.style.left = "4px";
+        y.style.right = "-520px";
+        a.className += " white-btn";
+        b.className = "btn";
+        x.style.opacity = 1;
+        y.style.opacity = 0;
+    }
+
+    function register() {
+        x.style.left = "-510px";
+        y.style.right = "5px";
+        a.className = "btn";
+        b.className += " white-btn";
+        x.style.opacity = 0;
+        y.style.opacity = 1;
+    }
+
+    function toggleAcessibilidade() {
+        const opcoes = document.getElementById("acessibilidade-opcoes");
+        opcoes.style.display = opcoes.style.display === "none" ? "block" : "none";
+    }
+
+    function aumentarFonte() {
+        document.body.style.fontSize = "larger";
+    }
+
+    function diminuirFonte() {
+        document.body.style.fontSize = "smaller";
+    }
+
+    function modoContraste() {
+        document.body.classList.toggle("alto-contraste");
+    }
+</script>
+
+</body>
+</html>

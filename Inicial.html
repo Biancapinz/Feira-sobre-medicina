@@ -37,8 +37,25 @@
                 <a href='#'>Esqueci minha Senha</a>
                 <button type='submit'>Login</button>
                 <div class='register-link'>
-                    <p>Não tem uma conta? <a href='#'>Cadastre-se</a></p>
+                    <p>Não tem uma conta? <a href='novo-usuario.php'>Cadastre-se</a></p>
                 </div>
+
+            <div class = 'container'>
+                <div class = 'row'>
+                    <div class = 'col mt-5'>
+                    <?php
+                    switch(@$_REQUESET["page"]){
+                    case "novo":
+                    include("novo-usuario.php");
+                    break;
+                    default:
+                    print "Bem vindooo";
+                    }
+                    ?>
+            </div>
+            </div>
+            </div>
+            
             </form>
         </main>
     </div>

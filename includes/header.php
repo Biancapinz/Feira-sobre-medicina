@@ -13,6 +13,8 @@ $arquivoJS = "script.js?t=".$atualizador;
     <link rel="sho$arquivoCSSrtcut icon" href="img/worldmap-sphere-png.webp" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/<?php echo $templateCSS?>">
     <link rel="stylesheet" href="./assets/css/<?php echo $arquivoCSS?>">
+    <link rel="stylesheet" href="./assets/css/template.css?t=<?php echo $atualizador; ?>">
+    <link rel="stylesheet" href="./assets/css/index.css?t=<?php echo $atualizador; ?>">
     <script src="./assets/<?php echo $arquivoJS?>"></script>
     <link rel="shortcut icon" href="img/worldmap-sphere-png.webp" type="image/x-icon">
 </head>
@@ -64,3 +66,9 @@ $arquivoJS = "script.js?t=".$atualizador;
   
 
 </header>
+
+<?php 
+include_once './includes/footer.php';
+?>
+
+</body>

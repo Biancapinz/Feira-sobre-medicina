@@ -1,0 +1,56 @@
+#section3 {
+  background: #1e1e1e;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+#section3 .logo-hora {
+  max-width: 150px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.support-section {
+  margin: 10px 0;
+}
+
+.support-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #00bfa5;
+}
+
+.support-section a {
+  color: #80deea;
+  text-decoration: none;
+}
+
+.support-section a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  margin: 15px 0;
+}
+
+.social-icons a {
+  font-size: 1.8em;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.social-icons a:nth-child(1) { color: #25D366; }   /* WhatsApp */
+.social-icons a:nth-child(2) { color: #E1306C; }   /* Instagram */
+.social-icons a:nth-child(3) { color: #3b5998; }   /* Facebook */
+
+.logo-selecta {
+  max-width: 100px;
+  border-radius: 8px;
+}
+
+#bx {
+  font-size: 0.9em;
+  color: #ccc;
+}

@@ -20,7 +20,7 @@ include_once './includes/header.php';
       <div class="l-cards">
         <article class="c-card">
           <div class="c-card__image">
-            <img src="img/PHOTO-2023-07-21-13-43-46 (1).jpg.webp" width="100%" alt="image placeholder">
+            <img src="contents/images.jpg" width="100%" alt="image placeholder">
           </div>
       
           <div class="c-card__content">
@@ -50,7 +50,7 @@ include_once './includes/header.php';
       
         <article class="c-card">
           <div class="c-card__image">
-            <img src="img/Hospital-Mãe-de-Deus-aprimora-fluxo-de-atendimento-e-reduz-espera-na-Emergência.jpg" width="100%" alt="image placeholder">
+            <img src="contents/Hospital-Mae-de-Deus_1-850x560.jpg" width="100%" alt="image placeholder">
           </div>
       
           <div class="c-card__content">

@@ -1,4 +1,15 @@
 <?php
+
+include_once './includes/conexao.php';
+$pagina = 'template';
+include_once './includes/header.php';
+
+<main class="container" >
+
+</main>
+
+include_once './includes/footer.php';
+
 session_start();
 include "Conexao.php";
 
@@ -22,5 +33,6 @@ if ($user = $result->fetch_assoc()) {
 } else {
     echo json_encode(["error" => "Usuário não encontrado"]);
 }
+
 
 ?>

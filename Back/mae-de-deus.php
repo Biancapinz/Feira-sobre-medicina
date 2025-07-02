@@ -28,13 +28,6 @@
       <li><a href="extras/aquecimento.html">Aprender</a></li>
       <li><a href="#section3">Sobre</a></li>
     </ul>
-
-    <div class="menu-hamb-button hide-on-desktop">
-      <div class="btn-line"></div>
-      <div class="btn-line"></div> 
-      <div class="btn-line"></div>
-    </div>
-
     
 
   </nav>

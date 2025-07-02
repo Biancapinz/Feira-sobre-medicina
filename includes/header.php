@@ -13,8 +13,6 @@ $arquivoJS = "script.js?t=".$atualizador;
     <link rel="sho$arquivoCSSrtcut icon" href="img/worldmap-sphere-png.webp" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/<?php echo $templateCSS?>">
     <link rel="stylesheet" href="./assets/css/<?php echo $arquivoCSS?>">
-    <link rel="stylesheet" href="./assets/css/template.css?t=<?php echo $atualizador; ?>">
-    <link rel="stylesheet" href="./assets/css/index.css?t=<?php echo $atualizador; ?>">
     <script src="./assets/<?php echo $arquivoJS?>"></script>
     <link rel="shortcut icon" href="img/worldmap-sphere-png.webp" type="image/x-icon">
 </head>
@@ -31,12 +29,7 @@ $arquivoJS = "script.js?t=".$atualizador;
         <h1><a href="../index.html">Inovação e acessibilidade na medicina</a></h1>
       </div>
 
-    <ul  class="navbar-links">
-      <li><a href="#">Dados</a></li>
-      <li><a href="#section2">Tópicos</a></li>
-      <li><a href="extras/aquecimento.html">Aprender</a></li>
-      <li><a href="#section3">Sobre</a></li>
-    </ul>
+    
 
     <div class="menu-hamb-button hide-on-desktop">
       <div class="btn-line"></div>
@@ -66,9 +59,3 @@ $arquivoJS = "script.js?t=".$atualizador;
   
 
 </header>
-
-<?php 
-include_once './includes/footer.php';
-?>
-
-</body>

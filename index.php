@@ -1,10 +1,35 @@
+
 <?php
+// ...restante do código...
+
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+
+    $sql = "SELECT * FROM usuarios WHERE Email = ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $usuario = mysqli_fetch_assoc($result);
+
+    if ($usuario && password_verify($senha, $usuario['senha'])) {
+        $_SESSION['id'] = $usuario['ID'];
+        $_SESSION['nome'] = $usuario['Usuario'];
+        $msg = "Login realizado com sucesso!";
+    } else {
+        $msg = "Email ou senha inválidos!";
+    }
+}
+?>
+
+<?php
+session_start();
 include_once './includes/conexao.php';
 $pagina = 'index';
 include_once './includes/header.php';
-?>      
-
-session_start();
+?>
+<!-- O RESTANTE DO SEU HTML AQUI -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -30,18 +55,6 @@ session_start();
 <body>
 
 <!-- NAVBAR -->
-<header class="navbar">
-  <ul class="navbar-links">
-    <li><a href="#">Dados</a></li>
-    <li><a href="#section2">Tópicos</a></li>
-    <li><a href="extras/aquecimento.html">Aprender</a></li>
-    <li><a href="#section3">Sobre</a></li>
-  </ul>
-  <div class="search-box">
-    <input class="search-txt" type="text" id="pesquisa" placeholder="Faça sua pesquisa">
-    <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
-  </div>
-</header>
 
 <main>
   <!-- Carrossel -->
@@ -242,6 +255,9 @@ session_start();
     </div>
   </div> 
 </main>
+
+
+<?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
 
 <?php
 include_once './includes/footer.php';

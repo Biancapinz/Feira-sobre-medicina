@@ -94,21 +94,23 @@ if (isset($_POST['login'])) {
 </head>
 <body>
 
-<!-- NAVBAR -->
-
-<main>
-  <!-- Carrossel -->
-  <div class="carrossel">
-    <input type="radio" name="slide" id="slide1" checked>
-    <input type="radio" name="slide" id="slide2">
-    <input type="radio" name="slide" id="slide3">
+<header class="navbar">
+  <ul class="navbar-links">
+    <li><a href="#">Dados</a></li>
+    <li><a href="#section2">Tópicos</a></li>
+    <li><a href="extras/aquecimento.html">Aprender</a></li>
+    <li><a href="#section3">Sobre</a></li>
+  </ul>
+  <div class="search-box">
+    <input class="search-txt" type="text" id="pesquisa" placeholder="Faça sua pesquisa">
+    <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
+  </div>
+</header>
 
 <main class="container">
 
-  <!-- Mensagem do login -->
   <?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
 
-  <!-- LOGIN OU CARDS -->
   <?php if (!isset($_SESSION['id'])): ?>
     <h2>Login</h2>
     <form method="post">
@@ -150,35 +152,35 @@ if (isset($_POST['login'])) {
       </div>
     </div>
 
-    <!-- CARDS -->
+    <!-- SEUS 6 CARDS FIXOS -->
+    <div class="l-cards">
+      <!-- aqui vai aquele seu bloco dos 6 cards manual -->
+      <!-- ... -->
+    </div>
+
+    <!-- CARDS DO BANCO -->
     <?php
     $sql = "SELECT * FROM hospitais";
     $stmt = mysqli_prepare($conexao, $sql);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     ?>
-
-    <div class="l-cards"> 
-
-  <?php 
-  while ($hospital = mysqli_fetch_assoc($result)) {
-  ?>
-      <article class="c-card">
-      <div class="c-card__image">
-        <img src="Back/img/<?php echo $hospital['Foto'];?>" alt="Imagem Hospital 1">
-      </div>
-      <div class="c-card__content">
-        <h5><?php echo $hospital['Nome'];?></h5>
-        <p><?php echo $hospital['ParagrafoAbertura'];?></p>
-        <a href="./hospital.php?id=<?php echo $hospital['HospitalID'];?>" class="button">Para mais informações</a>
-      </div>
-    </article>
-  <?php
-  }
-  ?>
-
+    <div class="l-cards">
+      <?php while ($hospital = mysqli_fetch_assoc($result)) { ?>
+        <article class="c-card">
+          <div class="c-card__image">
+            <img src="<?php echo $hospital['Foto']; ?>" alt="Foto do hospital">
+          </div>
+          <div class="c-card__content">
+            <h5><?php echo $hospital['Nome'];?></h5>
+            <p><?php echo $hospital['ParagrafoAbertura'];?></p>
+            <a href="./hospital.php?id=<?php echo $hospital['HospitalID'];?>" class="button">Para mais informações</a>
+          </div>
+        </article>
+      <?php } ?>
     </div>
   <?php endif; ?>
+
 </main>
 
 <footer style="text-align: center; padding: 20px; background: #093b77; color: white;">

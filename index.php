@@ -1,10 +1,37 @@
+
 <?php
+session_start();
 include_once './includes/conexao.php';
 $pagina = 'index';
 include_once './includes/header.php';
-?>      
 
-session_start();
+?>
+
+<?php
+// ...restante do código...
+
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+
+    $sql = "SELECT * FROM usuarios WHERE Email = ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $usuario = mysqli_fetch_assoc($result);
+
+    if ($usuario && password_verify($senha, $usuario['senha'])) {
+        $_SESSION['id'] = $usuario['ID'];
+        $_SESSION['nome'] = $usuario['Usuario'];
+        $msg = "Login realizado com sucesso!";
+    } else {
+        $msg = "Email ou senha inválidos!";
+    }
+}
+?>
+
+<!-- O RESTANTE DO SEU HTML AQUI -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -33,6 +60,8 @@ session_start();
 <header class="navbar">
   <ul class="navbar-links">
     <li><a href="#">Dados</a></li>
+    <li><a href="#section2">Tópicos</a></li>
+    <li><a href="extras/aquecimento.html">Aprender</a></li>
     <li><a href="#section3">Sobre</a></li>
   </ul>
   <div class="search-box">
@@ -74,41 +103,14 @@ session_start();
     </div>
   </div>
 
-  <!-- CARDS DE HOSPITAIS -->
-  <div class="l-cards">
-    <article class="c-card">
-      <div class="c-card__image">
-        <img src="Back/img/PHOTO-2023-07-21-13-43-46 (1).jpg.webp" alt="Imagem Hospital 1">
-      </div>
-      <div class="c-card__content">
-        <h5>Hospital de Clínicas</h5>
-        <p>Centro de ensino e simulação com ambiente tecnológico e inovador.</p>
-        <a href="Extras 2/especiesnovo 1.html" class="button">Para mais informações</a>
-      </div>
-    </article>
+  <?php
+  $sql = "SELECT * FROM hospitais";
+  $stmt = mysqli_prepare($conexao, $sql);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  $hospitais = mysqli_fetch_assoc($result);
+  ?>
 
-    <article class="c-card">
-      <div class="c-card__image">
-        <img src="Back/img/images.jpg" alt="Imagem Hospital 2">
-      </div>
-      <div class="c-card__content">
-        <h5>Hospital Moinhos de Vento</h5>
-        <p>Infraestrutura de excelência, terapia intensiva e cirurgia robótica.</p>
-        <a href="Extras 2/aguanovo 1.html" class="button">Para mais informações</a>
-      </div>
-    </article>
-
-    <article class="c-card">
-      <div class="c-card__image">
-        <img src="Back/img/Hospital-Mãe-de-Deus-aprimora-fluxo-de-atendimento-e-reduz-espera-na-Emergência.jpg" alt="Imagem Hospital 3">
-      </div>
-      <div class="c-card__content">
-        <h5>Hospital Mãe de Deus</h5>
-        <p>Sala conceito para ortopedia com tecnologia de ponta e acesso biométrico.</p>
-        <a href="Extras 2/queimadanovo 1.html" class="button">Para mais informações</a>
-      </div>
-    </article>
-  </div>
 
   <!-- LOGIN OU COMENTÁRIO -->
   <?php if (!isset($_SESSION['id'])): ?>
@@ -153,7 +155,9 @@ session_start();
   <div class="container mt-5 pt-5">
     <div class="l-cards"> 
 
-      <!-- CARD 1 -->
+  <?php 
+  while ($hospital = mysqli_fetch_assoc($result)) {
+  ?>
       <article class="c-card">
         <div class="c-card__image">
           <img src="Back/img/PHOTO-2023-07-21-13-43-46 (1).jpg.webp" alt="image placeholder">
@@ -162,7 +166,7 @@ session_start();
           <div class="card-body">
             <h5 class="card-title">Hospital de Clinicas</h5>
             <p class="card-text">Além dos diferentes ambientes assistenciais...</p>
-            <a href="Back/hospital de clinicas.php" class="button">Para mais informações</a>
+            <a href="Extras 2/especiesnovo 1.html" class="button">Para mais informações</a>
           </div>
         </div>
       </article>
@@ -176,7 +180,7 @@ session_start();
           <div class="card-body">
             <h5 class="card-title">Hospital Moinhos de Vento</h5>
             <p class="card-text">A infraestrutura do Hospital Moinhos de Vento...</p>
-            <a href="Back/moinhos de vento.php" class="button">Para mais informações</a>
+            <a href="Extras 2/aguanovo 1.html" class="button">Para mais informações</a>
           </div>
         </div>
       </article>
@@ -190,7 +194,7 @@ session_start();
           <div class="card-body">
             <h5 class="card-title">Hospital Mãe de Deus</h5>
             <p class="card-text">Uma das quatro novas salas, denominada sala conceito...</p>
-            <a href="Back/mae-de-deus.php" class="button">Para mais informações</a>
+            <a href="Extras 2/queimadanovo 1.html" class="button">Para mais informações</a>
           </div>
         </div>
       </article>
@@ -240,6 +244,9 @@ session_start();
     </div>
   </div> 
 </main>
+
+
+<?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
 
 <?php
 include_once './includes/footer.php';

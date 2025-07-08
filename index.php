@@ -33,8 +33,6 @@ session_start();
 <header class="navbar">
   <ul class="navbar-links">
     <li><a href="#">Dados</a></li>
-    <li><a href="#section2">Tópicos</a></li>
-    <li><a href="extras/aquecimento.html">Aprender</a></li>
     <li><a href="#section3">Sobre</a></li>
   </ul>
   <div class="search-box">
@@ -164,7 +162,7 @@ session_start();
           <div class="card-body">
             <h5 class="card-title">Hospital de Clinicas</h5>
             <p class="card-text">Além dos diferentes ambientes assistenciais...</p>
-            <a href="Extras 2/especiesnovo 1.html" class="button">Para mais informações</a>
+            <a href="Back/hospital de clinicas.php" class="button">Para mais informações</a>
           </div>
         </div>
       </article>
@@ -178,7 +176,7 @@ session_start();
           <div class="card-body">
             <h5 class="card-title">Hospital Moinhos de Vento</h5>
             <p class="card-text">A infraestrutura do Hospital Moinhos de Vento...</p>
-            <a href="Extras 2/aguanovo 1.html" class="button">Para mais informações</a>
+            <a href="Back/moinhos de vento.php" class="button">Para mais informações</a>
           </div>
         </div>
       </article>
@@ -192,7 +190,7 @@ session_start();
           <div class="card-body">
             <h5 class="card-title">Hospital Mãe de Deus</h5>
             <p class="card-text">Uma das quatro novas salas, denominada sala conceito...</p>
-            <a href="Extras 2/queimadanovo 1.html" class="button">Para mais informações</a>
+            <a href="Back/mae-de-deus.php" class="button">Para mais informações</a>
           </div>
         </div>
       </article>

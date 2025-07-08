@@ -9,7 +9,7 @@ $arquivoJS = "script.js?t=".$atualizador;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aumento do nivel do mar</title>
+    <title>Acessibilidade</title>
     <link rel="sho$arquivoCSSrtcut icon" href="img/worldmap-sphere-png.webp" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/<?php echo $templateCSS?>">
     <link rel="stylesheet" href="./assets/css/<?php echo $arquivoCSS?>">

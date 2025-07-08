@@ -4,6 +4,7 @@ session_start();
 include_once './includes/conexao.php';
 $pagina = 'index';
 include_once './includes/header.php';
+
 ?>
 
 <?php
@@ -98,32 +99,6 @@ if (isset($_POST['login'])) {
   $hospitais = mysqli_fetch_assoc($result);
   ?>
 
-
-  <!-- CARDS DE HOSPITAIS -->
-  <div class="l-cards">
-
-    <article class="c-card">
-      <div class="c-card__image">
-        <img src="Back/img/images.jpg" alt="Imagem Hospital 2">
-      </div>
-      <div class="c-card__content">
-        <h5>Hospital Moinhos de Vento</h5>
-        <p>Infraestrutura de excelência, terapia intensiva e cirurgia robótica.</p>
-        <a href="Extras 2/aguanovo 1.html" class="button">Para mais informações</a>
-      </div>
-    </article>
-
-    <article class="c-card">
-      <div class="c-card__image">
-        <img src="Back/img/Hospital-Mãe-de-Deus-aprimora-fluxo-de-atendimento-e-reduz-espera-na-Emergência.jpg" alt="Imagem Hospital 3">
-      </div>
-      <div class="c-card__content">
-        <h5>Hospital Mãe de Deus</h5>
-        <p>Sala conceito para ortopedia com tecnologia de ponta e acesso biométrico.</p>
-        <a href="Extras 2/queimadanovo 1.html" class="button">Para mais informações</a>
-      </div>
-    </article>
-  </div>
 
   <!-- LOGIN OU COMENTÁRIO -->
   <?php if (!isset($_SESSION['id'])): ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once './includes/conexao.php';
-$pagina = 'template';
+$pagina = 'index';
 include_once './includes/header.php';
 
 // Processamento do login
@@ -50,22 +50,7 @@ if (isset($_POST['login'])) {
 </head>
 <body>
 
-<!-- NAVBAR
-<header class="navbar">
-  <ul class="navbar-links">
-    <li><a href="#">Dados</a></li>
-    <li><a href="#section2">Tópicos</a></li>
-    <li><a href="extras/aquecimento.html">Aprender</a></li>
-    <li><a href="#section3">Sobre</a></li>
-  </ul>
-  <div class="search-box">
-    <input class="search-txt" type="text" id="pesquisa" placeholder="Faça sua pesquisa">
-    <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
-  </div>
-</header> -->
-
 <main class="container">
-
   <?php if (!isset($_SESSION['id'])): ?>
     <h2>Login</h2>
     <?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
@@ -77,18 +62,39 @@ if (isset($_POST['login'])) {
       <button type="submit" name="login">Entrar</button>
     </form>
     <p>Não tem cadastro? <a href="cadastro.php">Cadastre-se aqui</a></p>
+
   <?php else: ?>
     <h2>Olá, <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h2>
     <a href="logout.php">Sair</a>
-    <!-- Seu formulário de comentário ou conteúdo para usuários logados -->
-  <?php endif; ?>
 
+    <?php
+    // consulta aos hospitais só quando estiver logado
+    $sql = "SELECT * FROM hospitais";
+    $stmt = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    ?>
+
+    <div class="l-cards">
+      <?php while ($hospital = mysqli_fetch_assoc($result)) { ?>
+        <article class="c-card">
+          <div class="c-card__image">
+            <img src="<?php echo $hospital['Foto']; ?>" alt="Foto do hospital">
+          </div>
+          <div class="c-card__content">
+            <h5><?php echo $hospital['Nome']; ?></h5>
+            <p><?php echo $hospital['ParagrafoAbertura']; ?></p>
+            <a href="hospital.php?id=<?php echo $hospital['HospitalID']; ?>">Para mais informações</a>
+          </div>
+        </article>
+      <?php } ?>
+    </div>
+  <?php endif; ?>
 </main>
 
 <?php
 include_once './includes/footer.php';
 ?>
-<!-- não pode ter 2 footer ou 2 main vai travar tudo isso aqui -->
 <footer style="text-align: center; padding: 20px; background: #093b77; color: white;">
   <p>&copy; <?php echo date("Y"); ?> Acessibilidade Hospitalar</p>
 </footer>

@@ -1,43 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aumento do nivel do mar</title>
-    <link rel="shortcut icon" href="img/worldmap-sphere-png.webp" type="image/x-icon">
-    <link rel="stylesheet" href="mae-de-deus.css">
-    <script src="script.js"></script>
-    <link rel="shortcut icon" href="img/worldmap-sphere-png.webp" type="image/x-icon">
+  <meta charset="UTF-8">
+  <title>Acessibilidade Hospitalar</title>
+  <link rel="stylesheet" href="moinhos de vento.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #f5f5f5; }
+    .navbar { background-color: #093b77; padding: 10px; color: white; display: flex; justify-content: space-between; align-items: center; }
+    .navbar-links li { display: inline; margin: 0 10px; }
+    .navbar a { color: white; text-decoration: none; font-weight: bold; }
+    .container { max-width: 1000px; margin: 30px auto; padding: 20px; background: white; border-radius: 8px; }
+    form { margin-top: 30px; }
+    input, textarea, select, button { width: 100%; padding: 10px; margin: 8px 0; }
+    button { background-color: #007BFF; color: white; border: none; cursor: pointer; }
+    .carrossel, .l-cards { margin-bottom: 40px; }
+    .c-card { border: 1px solid #ccc; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
+    .c-card__image img { width: 100%; }
+    .c-card__content { padding: 15px; }
+  </style>
 </head>
 <body>
-    
-  <header id="section1"> 
-      
-    <nav>
-      <div class="logo">
-          <a href="../index.html"><img src="../img/Design_sem_nome-removebg-preview.png" alt=""></a>
-      </div>
-    
-      <div class="logotxt">
-        <h1><a href="../index.html">Inovação e acessibilidade na medicina</a></h1>
-      </div>
 
-    <ul  class="navbar-links">
-      <li><a href="#">Dados</a></li>
-      <li><a href="#section2">Tópicos</a></li>
-      <li><a href="extras/aquecimento.html">Aprender</a></li>
-      <li><a href="#section3">Sobre</a></li>
-    </ul>
-
-    <div class="menu-hamb-button hide-on-desktop">
-      <div class="btn-line"></div>
-      <div class="btn-line"></div> 
-      <div class="btn-line"></div>
-    </div>
-
-    
-
-  </nav>
+<!-- NAVBAR -->
+<header class="navbar">
+  <ul class="navbar-links">
+    <li><a href="#">Dados</a></li>
+    <li><a href="#section3">Sobre</a></li>
+  </ul>
+  <div class="search-box">
+    <input class="search-txt" type="text" id="pesquisa" placeholder="Faça sua pesquisa">
+    <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
+  </div>
+</header>
 
   <div vw class="enabled">
     <div vw-access-button class="active"></div>
@@ -55,10 +49,7 @@
         avatar: 'random',
     });
   </script>
-  
 
-  <header>
-     
     <main class="container" >
       <div class="boxmain">
       <div class="p1">

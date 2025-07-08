@@ -94,6 +94,15 @@ if (isset($_POST['login'])) {
 </head>
 <body>
 
+<!-- NAVBAR -->
+
+<main>
+  <!-- Carrossel -->
+  <div class="carrossel">
+    <input type="radio" name="slide" id="slide1" checked>
+    <input type="radio" name="slide" id="slide2">
+    <input type="radio" name="slide" id="slide3">
+
 <main class="container">
 
   <!-- Mensagem do login -->
@@ -150,18 +159,24 @@ if (isset($_POST['login'])) {
     ?>
 
     <div class="l-cards"> 
-      <?php while ($hospital = mysqli_fetch_assoc($result)) { ?>
-        <article class="c-card">
-          <div class="c-card__image">
-            <img src="<?php echo $hospital['Foto']; ?>" alt="Foto do hospital">
-          </div>
-          <div class="c-card__content">
-            <h5><?php echo $hospital['Nome'];?></h5>
-            <p><?php echo $hospital['ParagrafoAbertura'];?></p>
-            <a href="./hospital.php?id=<?php echo $hospital['HospitalID'];?>" class="button">Para mais informações</a>
-          </div>
-        </article>
-      <?php } ?>
+
+  <?php 
+  while ($hospital = mysqli_fetch_assoc($result)) {
+  ?>
+      <article class="c-card">
+      <div class="c-card__image">
+        <img src="Back/img/<?php echo $hospital['Foto'];?>" alt="Imagem Hospital 1">
+      </div>
+      <div class="c-card__content">
+        <h5><?php echo $hospital['Nome'];?></h5>
+        <p><?php echo $hospital['ParagrafoAbertura'];?></p>
+        <a href="./hospital.php?id=<?php echo $hospital['HospitalID'];?>" class="button">Para mais informações</a>
+      </div>
+    </article>
+  <?php
+  }
+  ?>
+
     </div>
   <?php endif; ?>
 </main>

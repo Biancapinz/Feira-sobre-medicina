@@ -46,21 +46,23 @@ if (isset($_POST['login'])) {
     .c-card { border: 1px solid #ccc; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
     .c-card__image img { width: 100%; }
     .c-card__content { padding: 15px; }
-    
   </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- NAVBAR
 <header class="navbar">
   <ul class="navbar-links">
     <li><a href="#">Dados</a></li>
+    <li><a href="#section2">Tópicos</a></li>
+    <li><a href="extras/aquecimento.html">Aprender</a></li>
+    <li><a href="#section3">Sobre</a></li>
   </ul>
   <div class="search-box">
     <input class="search-txt" type="text" id="pesquisa" placeholder="Faça sua pesquisa">
     <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
   </div>
-</header> 
+</header> -->
 
 <main class="container">
 

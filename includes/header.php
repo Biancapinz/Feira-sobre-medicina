@@ -20,7 +20,10 @@ $arquivoJS = "script.js?t=".$atualizador;
 <header class="navbar">
   <ul class="navbar-links">
     <li><a href="index.php">Início</a></li>
-
+    <li><a href="hospitais.php">Hospitais</a></li>
+    <li><a href="#section2">Tópicos</a></li>
+    <li><a href="extras/aquecimento.html">Aprender</a></li>
+    <li><a href="#section3">Sobre</a></li>
   </ul>
   <div>
     <?php if (isset($_SESSION['id'])): ?>

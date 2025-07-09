@@ -8,7 +8,7 @@
     <div class="footer-section">
       <p class="footer-title">Desenvolvedores</p>
       <a target="_blank" href="http://github.com/analuizamoreira">Ana Luiza Moreira</a>
-      <a target="_blank" href="https://github.com/Biancapinz">Bianca Pinzon</a>
+      <a target="_blank" href="http://github.com/analuizamoreira">Bianca Pinzon</a>
     </div>
 
     <div class="footer-section">
@@ -27,5 +27,5 @@
 
   </div>
 
-  
+  <p class="footer-copy">&copy; 2024 Planeta Alerta. Todos os direitos reservados.</p>
 </footer>

@@ -219,7 +219,7 @@ input[type="radio"] {
   justify-content: space-around;
   padding: 15px;
   background-color: #fff;
-  height: auto;
+  height: 50%;
 }
 
 .card-body {

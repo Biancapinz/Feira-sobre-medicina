@@ -95,9 +95,7 @@
       <a target="_blank" href="http:github.com/pedrolealp7">Pedro Rosa Leal</a>
   </div>
     <div class="social-icons">
-        <a href="https://wa.me/5551984850501" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://www.instagram.com/hora.da.aventuraaa/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/horadaaventuraa/" target="_blank"><i class="fab fa-facebook"></i></a>
+        
     </div>
 
     <div class="support-section">
@@ -105,7 +103,7 @@
         <img src="../img/logo nasa.png" alt="Logo de Apoio" class="logo-selecta">
     </div>
 
-    <p id="bx">&copy; 2024 Planeta Alerta. Todos os direitos reservados.</p>
+    <p id="bx">&copy; 2025.</p>
 
   </footer>
 

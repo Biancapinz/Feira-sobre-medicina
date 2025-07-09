@@ -5,11 +5,7 @@ include_once './includes/conexao.php';
 $pagina = 'index';
 include_once './includes/header.php';
 
-?>
-
-<?php
 // ...restante do código...
-
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
@@ -36,6 +32,7 @@ if (isset($_POST['login'])) {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  
   <meta charset="UTF-8">
   <title>Acessibilidade Hospitalar</title>
   <link rel="stylesheet" href="seu-estilo.css">
@@ -55,6 +52,7 @@ if (isset($_POST['login'])) {
   </style>
 </head>
 <body>
+  
 
 <!-- NAVBAR -->
 <header class="navbar">
@@ -103,14 +101,6 @@ if (isset($_POST['login'])) {
     </div>
   </div>
 
-  <?php
-  $sql = "SELECT * FROM hospitais";
-  $stmt = mysqli_prepare($conexao, $sql);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
-  $hospitais = mysqli_fetch_assoc($result);
-  ?>
-
 
   <!-- LOGIN OU COMENTÁRIO -->
   <?php if (!isset($_SESSION['id'])): ?>
@@ -156,90 +146,30 @@ if (isset($_POST['login'])) {
     <div class="l-cards"> 
 
   <?php 
+  $sql = "SELECT * FROM hospitais";
+  $stmt = mysqli_prepare($conexao, $sql);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  $hospitais = mysqli_fetch_assoc($result);
+
   while ($hospital = mysqli_fetch_assoc($result)) {
   ?>
       <article class="c-card">
         <div class="c-card__image">
-          <img src="Back/img/PHOTO-2023-07-21-13-43-46 (1).jpg.webp" alt="image placeholder">
+          <img src="Back/img/<?php echo $hospital['Foto'];?>" alt="Imagem Hospital 1">
         </div>
         <div class="c-card__content">
-          <div class="card-body">
-            <h5 class="card-title">Hospital de Clinicas</h5>
-            <p class="card-text">Além dos diferentes ambientes assistenciais...</p>
-            <a href="Extras 2/especiesnovo 1.html" class="button">Para mais informações</a>
-          </div>
+          <h5><?php echo $hospital['Nome'];?></h5>
+          <p><?php echo $hospital['ParagrafoAbertura'];?></p>
+          <a href="./hospital.php?id=<?php echo $hospital['HospitalID'];?>" class="button">Para mais informações</a>
         </div>
       </article>
+<?php
+}
+?>
+     
+      
 
-      <!-- CARD 2 -->
-      <article class="c-card">
-        <div class="c-card__image">
-          <img src="Back/img/images.jpg" alt="image placeholder">
-        </div>
-        <div class="c-card__content">
-          <div class="card-body">
-            <h5 class="card-title">Hospital Moinhos de Vento</h5>
-            <p class="card-text">A infraestrutura do Hospital Moinhos de Vento...</p>
-            <a href="Extras 2/aguanovo 1.html" class="button">Para mais informações</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 3 -->
-      <article class="c-card">
-        <div class="c-card__image">
-          <img src="Back/img/Hospital-Mãe-de-Deus-aprimora-fluxo-de-atendimento-e-reduz-espera-na-Emergência.jpg" alt="image placeholder">
-        </div>
-        <div class="c-card__content">
-          <div class="card-body">
-            <h5 class="card-title">Hospital Mãe de Deus</h5>
-            <p class="card-text">Uma das quatro novas salas, denominada sala conceito...</p>
-            <a href="Extras 2/queimadanovo 1.html" class="button">Para mais informações</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 4 -->
-      <article class="c-card">
-        <div class="c-card__image">
-          <img src="Back/img/PHOTO-2023-07-21-13-43-46 (1).jpg.webp" alt="image placeholder">
-        </div>
-        <div class="c-card__content">
-          <div class="card-body">
-            <h5 class="card-title">Hospital de Clinicas</h5>
-            <p class="card-text">Além dos diferentes ambientes assistenciais...</p>
-            <a href="Extras 2/especiesnovo 1.html" class="button">Para mais informações</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 5 -->
-      <article class="c-card">
-        <div class="c-card__image">
-          <img src="Back/img/images.jpg" alt="image placeholder">
-        </div>
-        <div class="c-card__content">
-          <div class="card-body">
-            <h5 class="card-title">Hospital Moinhos de Vento</h5>
-            <p class="card-text">A infraestrutura do Hospital Moinhos de Vento...</p>
-            <a href="Extras 2/aguanovo 1.html" class="button">Para mais informações</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 6 -->
-      <article class="c-card">
-        <div class="c-card__image">
-          <img src="Back/img/Hospital-Mãe-de-Deus-aprimora-fluxo-de-atendimento-e-reduz-espera-na-Emergência.jpg" alt="image placeholder">
-        </div>
-        <div class="c-card__content">
-          <div class="card-body">
-            <h5 class="card-title">Hospital Mãe de Deus</h5>
-            <p class="card-text">Uma das quatro novas salas, denominada sala conceito...</p>
-            <a href="Extras 2/queimadanovo 1.html" class="button">Para mais informações</a>
-          </div>
-        </div>
-      </article>
 
     </div>
   </div> 

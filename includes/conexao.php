@@ -3,7 +3,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $senha = "";
-$banco = "acessibilidadenamed2"; // ⬅️ Altere aqui para o nome do seu banco no phpMyAdmin
+$banco = "acessibilidadenamed"; // ⬅️ Altere aqui para o nome do seu banco no phpMyAdmin
 
 // Criando conexão
 $conexao = mysqli_connect($servidor, $usuario, $senha, $banco);

@@ -103,7 +103,7 @@
         <img src="../img/logo nasa.png" alt="Logo de Apoio" class="logo-selecta">
     </div>
 
-    <p id="bx">&copy; 2024 Planeta Alerta. Todos os direitos reservados.</p>
+    <p id="bx">&copy; 2025 inovação na medicina.</p>
 
   </footer>
 

@@ -2,7 +2,7 @@
   <div class="footer-container">
 
     <div class="footer-logo">
-      <img src="img/Hospital-Mae-de-Deus-1-850x560.jpg" alt="Logo" class="logo-hora">
+      <img src="./assets/img/medico.png" alt="Logo" class="logo-hora">
     </div>
 
     <div class="footer-section">
@@ -13,7 +13,7 @@
 
     <div class="footer-section">
       <p class="footer-title">Apoio</p>
-      <img src="../img/logo nasa.png" alt="Logo de Apoio" class="logo-selecta">
+      <img src="./assets/img/medico.png" alt="Logo" class="logo-hora">
     </div>
 
     <div class="footer-section">
@@ -27,5 +27,7 @@
 
   </div>
 
-  <p class="footer-copy">&copy; 2024 Planeta Alerta. Todos os direitos reservados.</p>
+  <p class="footer-copy">&copy; <?php echo date("Y"); ?> Acessibilidade Hospitalar. Todos os direitos reservados.</p>
+
+</footer>
 </footer>

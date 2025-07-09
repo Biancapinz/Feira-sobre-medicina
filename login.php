@@ -1,10 +1,7 @@
-<?php
-session_start();
-include_once './includes/conexao.php';
-$pagina = 'template';
-include_once './includes/header.php';
 
-// Processamento do login
+<?php
+// ...restante do código...
+
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
@@ -19,13 +16,20 @@ if (isset($_POST['login'])) {
     if ($usuario && password_verify($senha, $usuario['senha'])) {
         $_SESSION['id'] = $usuario['ID'];
         $_SESSION['nome'] = $usuario['Usuario'];
-        header("Location: index.php");
-        exit;
+        $msg = "Login realizado com sucesso!";
     } else {
         $msg = "Email ou senha inválidos!";
     }
 }
 ?>
+
+<?php
+session_start();
+include_once './includes/conexao.php';
+$pagina = 'hospital';
+include_once './includes/header.php';
+?>
+<!-- O RESTANTE DO SEU HTML AQUI -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -50,47 +54,33 @@ if (isset($_POST['login'])) {
 </head>
 <body>
 
-<!-- NAVBAR
-<header class="navbar">
-  <ul class="navbar-links">
-    <li><a href="#">Dados</a></li>
-    <li><a href="#section2">Tópicos</a></li>
-    <li><a href="extras/aquecimento.html">Aprender</a></li>
-    <li><a href="#section3">Sobre</a></li>
-  </ul>
-  <div class="search-box">
-    <input class="search-txt" type="text" id="pesquisa" placeholder="Faça sua pesquisa">
-    <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
-  </div>
-</header> -->
+<!-- NAVBAR -->
 
-<main class="container">
-
-  <?php if (!isset($_SESSION['id'])): ?>
-    <h2>Login</h2>
-    <?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
-    <form method="post">
-      <label>Email:</label>
-      <input type="email" name="email" required>
-      <label>Senha:</label>
-      <input type="password" name="senha" required>
-      <button type="submit" name="login">Entrar</button>
-    </form>
-    <p>Não tem cadastro? <a href="cadastro.php">Cadastre-se aqui</a></p>
-  <?php else: ?>
-    <h2>Olá, <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h2>
-    <a href="logout.php">Sair</a>
-    <!-- Seu formulário de comentário ou conteúdo para usuários logados -->
-  <?php endif; ?>
-
+  <!-- Cards -->
+  <div class="container mt-5 pt-5">
+    <div class="l-cards"> 
+    
+    <?php if (!isset($_SESSION['id'])): ?>
+      <h2>Login</h2>
+      <?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
+      <form method="post">
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        <label>Senha:</label>
+        <input type="password" name="senha" required>
+        <button type="submit" name="login">Entrar</button>
+      </form>
+      <p>Não tem cadastro? <a href="cadastro.php">Cadastre-se aqui</a></p>
+    <?php else: ?>
+      <h2>Olá, <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h2>
+      <a href="logout.php">Sair</a>
+      <!-- Seu formulário de comentário ou conteúdo para usuários logados -->
+    <?php endif; ?>
+    </div>
+  </div> 
 </main>
+
 
 <?php
 include_once './includes/footer.php';
 ?>
-<!-- não pode ter 2 footer ou 2 main vai travar tudo isso aqui -->
-<footer style="text-align: center; padding: 20px; background: #093b77; color: white;">
-  <p>&copy; <?php echo date("Y"); ?> Acessibilidade Hospitalar</p>
-</footer>
-</body>
-</html>

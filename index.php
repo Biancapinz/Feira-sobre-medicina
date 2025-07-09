@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include_once './includes/conexao.php';
@@ -26,12 +27,15 @@ if (isset($_POST['login'])) {
 }
 ?>
 
+<!-- O RESTANTE DO SEU HTML AQUI -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   
   <meta charset="UTF-8">
   <title>Acessibilidade Hospitalar</title>
+  <link rel="stylesheet" href="seu-estilo.css">
   <style>
     body { font-family: Arial, sans-serif; margin: 0; background-color: #f5f5f5; }
     .navbar { background-color: #093b77; padding: 10px; color: white; display: flex; justify-content: space-between; align-items: center; }
@@ -42,60 +46,15 @@ if (isset($_POST['login'])) {
     input, textarea, select, button { width: 100%; padding: 10px; margin: 8px 0; }
     button { background-color: #007BFF; color: white; border: none; cursor: pointer; }
     .carrossel, .l-cards { margin-bottom: 40px; }
-
-    .l-cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .c-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 300px;
-      height: 420px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      overflow: hidden;
-      background: #fff;
-    }
-
-    .c-card__image img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .c-card__content {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      padding: 15px;
-    }
-
-    .c-card__content p {
-      flex-grow: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .c-card__content a.button {
-      margin-top: auto;
-      display: inline-block;
-      background-color: #007BFF;
-      color: white;
-      padding: 8px 12px;
-      text-decoration: none;
-      border-radius: 4px;
-      text-align: center;
-    }
+    .c-card { border: 1px solid #ccc; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
+    .c-card__image img { width: 100%; }
+    .c-card__content { padding: 15px; }
   </style>
 </head>
 <body>
   
 
+<!-- NAVBAR -->
 <header class="navbar">
   <ul class="navbar-links">
     <li><a href="#">Dados</a></li>
@@ -109,9 +68,20 @@ if (isset($_POST['login'])) {
   </div>
 </header>
 
+<main>
+  <!-- Carrossel -->
+  <div class="carrossel">
+    <input type="radio" name="slide" id="slide1" checked>
+    <input type="radio" name="slide" id="slide2">
+    <input type="radio" name="slide" id="slide3">
+
 <main class="container">
 
-  <?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
+  <!-- CARROSSEL -->
+  <div class="carrossel">
+    <input type="radio" name="slide" id="slide1" checked>
+    <input type="radio" name="slide" id="slide2">
+    <input type="radio" name="slide" id="slide3">
 
     <div class="slides">
       <div class="slide s1">
@@ -144,63 +114,24 @@ if (isset($_POST['login'])) {
 
       <button type="submit" name="login">Entrar</button>
     </form>
-    <p>Não tem cadastro? <a href="cadastro.php">Cadastre-se aqui</a></p>
-
   <?php else: ?>
-    <h2>Olá, <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h2>
-    <a href="logout.php">Sair</a>
+    <h2>Olá, <?php echo $_SESSION['nome']; ?>!</h2>
+    <form method="post">
+      <label>Selecione o hospital:</label>
+      <select name="idhospital" required>
+        <?php
+        $hospitais = $conn->query("SELECT HospitalID, Nome FROM hospitais");
+        while ($h = $hospitais->fetch_assoc()) {
+          echo "<option value='{$h['HospitalID']}'>{$h['Nome']}</option>";
+        }
+        ?>
+      </select>
 
-    <!-- CARROSSEL -->
-    <div class="carrossel">
-      <input type="radio" name="slide" id="slide1" checked>
-      <input type="radio" name="slide" id="slide2">
-      <input type="radio" name="slide" id="slide3">
+      <label>Comentário:</label>
+      <textarea name="comentario" rows="4" required></textarea>
 
-      <div class="slides">
-        <div class="slide s1">
-          <img src="Back/img/PHOTO-2023-07-21-13-43-46 (1).jpg.webp" alt="Imagem 1">
-        </div>
-        <div class="slide s2">
-          <img src="Back/img/Hospital-Mae-de-Deus-1-850x560.jpg" alt="Imagem 2">
-        </div>
-        <div class="slide s3">
-          <img src="Back/img/images.jpg" alt="Imagem 3">
-        </div>
-      </div>
-      <div class="navigation">
-        <label for="slide1"></label>
-        <label for="slide2"></label>
-        <label for="slide3"></label>
-      </div>
-    </div>
-
-    <!-- SEUS 6 CARDS FIXOS -->
-    <div class="l-cards">
-      <!-- aqui vai aquele seu bloco dos 6 cards manual -->
-      <!-- ... -->
-    </div>
-
-    <!-- CARDS DO BANCO -->
-    <?php
-    $sql = "SELECT * FROM hospitais";
-    $stmt = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    ?>
-    <div class="l-cards">
-      <?php while ($hospital = mysqli_fetch_assoc($result)) { ?>
-        <article class="c-card">
-          <div class="c-card__image">
-            <img src="<?php echo $hospital['Foto']; ?>" alt="Foto do hospital">
-          </div>
-          <div class="c-card__content">
-            <h5><?php echo $hospital['Nome'];?></h5>
-            <p><?php echo $hospital['ParagrafoAbertura'];?></p>
-            <a href="./hospital.php?id=<?php echo $hospital['HospitalID'];?>" class="button">Para mais informações</a>
-          </div>
-        </article>
-      <?php } ?>
-    </div>
+      <button type="submit" name="comentar">Enviar Comentário</button>
+    </form>
   <?php endif; ?>
 
     <div class="navigation">
@@ -244,6 +175,13 @@ if (isset($_POST['login'])) {
   </div> 
 </main>
 
+
+<?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
+
+<?php
+include_once './includes/footer.php';
+?>
+<!-- RODAPÉ -->
 <footer style="text-align: center; padding: 20px; background: #093b77; color: white;">
   <p>&copy; <?php echo date("Y"); ?> Acessibilidade Hospitalar</p>
 </footer>

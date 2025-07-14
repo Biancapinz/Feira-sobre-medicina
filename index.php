@@ -195,6 +195,16 @@ include_once './includes/header.php';
   </div> 
 </main>
 
+<div class="comment-box">
+  <form id="comment-form">
+    <textarea name="comment" id="comment-text" placeholder="Escreva seu comentário aqui..."></textarea>
+    <button type="submit">Enviar Comentário</button>
+  </form>
+  <div id="comments-container">
+    <!-- Os comentários serão exibidos aqui -->
+  </div>
+</div>
+
 
 <?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
 

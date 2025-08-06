@@ -176,12 +176,20 @@ include_once './includes/header.php';
       $result = mysqli_stmt_get_result($stmt);
       $hospital = mysqli_fetch_assoc($result);
       ?>
+      <div class="esq">
+
+      </div>
+      <div class="dir">
+
+      </div>
+      
         <h1><?php echo $hospital['Nome']?></h1>
         <h3>Atendimento</h3>
         <p><?php echo $hospital['Atendimento']?></p>
         <h3>Infraestrututa</h3>
         <img src="<?php echo $hospital['Foto']; ?>" alt="<?php echo $hospital['Nome'];?>">
         <p><?php echo $hospital['Infraestrutura']?></p>
+        <p><?php echo $hospital['Endereco']?></p>
         
         <a href="./index.php">Voltar</a>
     </div>

@@ -1,6 +1,5 @@
 
 <?php
-// ...restante do código...
 
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
@@ -29,7 +28,6 @@ include_once './includes/conexao.php';
 $pagina = 'hospital';
 include_once './includes/header.php';
 ?>
-<!-- O RESTANTE DO SEU HTML AQUI -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -54,10 +52,7 @@ include_once './includes/header.php';
 </head>
 <body>
 
-<!-- NAVBAR -->
-
 <main>
-  <!-- Carrossel -->
   <div class="carrossel">
     <input type="radio" name="slide" id="slide1" checked>
     <input type="radio" name="slide" id="slide2">
@@ -65,7 +60,6 @@ include_once './includes/header.php';
 
 <main class="container">
 
-  <!-- CARROSSEL -->
   <div class="carrossel">
     <input type="radio" name="slide" id="slide1" checked>
     <input type="radio" name="slide" id="slide2">
@@ -89,7 +83,6 @@ include_once './includes/header.php';
     </div>
   </div>
 
-  <!-- CARDS DE HOSPITAIS -->
   <div class="l-cards">
     <article class="c-card">
       <div class="c-card__image">
@@ -125,7 +118,6 @@ include_once './includes/header.php';
     </article>
   </div>
 
-  <!-- LOGIN OU COMENTÁRIO -->
   <?php if (!isset($_SESSION['id'])): ?>
     <h2>Login</h2>
     <form method="post">
@@ -164,7 +156,6 @@ include_once './includes/header.php';
     </div>
   </div>
 
-  <!-- Cards -->
   <div class="container mt-5 pt-5">
     <div class="l-cards"> 
      <?php 
@@ -184,9 +175,10 @@ include_once './includes/header.php';
       </div>
       
         <h1><?php echo $hospital['Nome']?></h1>
-        <h3>Atendimento</h3>
+        <h3>Atendimento</h3> 
         <p><?php echo $hospital['Atendimento']?></p>
         <h3>Infraestrututa</h3>
+        <p><?php echo $hospital['Infraestrutura']?></p>
         <img src="<?php echo $hospital['Foto']; ?>" alt="<?php echo $hospital['Nome'];?>">
         <p><?php echo $hospital['Infraestrutura']?></p>
         <p><?php echo $hospital['Endereco']?></p>
@@ -202,7 +194,6 @@ include_once './includes/header.php';
 <?php
 include_once './includes/footer.php';
 ?>
-<!-- RODAPÉ -->
 
 </body>
 </html>

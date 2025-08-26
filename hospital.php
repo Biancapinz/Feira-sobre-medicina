@@ -157,32 +157,42 @@ include_once './includes/header.php';
   </div>
 
   <div class="container mt-5 pt-5">
+    <?php 
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM hospitais WHERE HospitalID = ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $hospital = mysqli_fetch_assoc($result);
+    ?>
+    <h1 class="hospTitulo"><?php echo $hospital['Nome']?></h1>
+
     <div class="l-cards"> 
-     <?php 
-      $id = $_GET['id'];
-      $sql = "SELECT * FROM hospitais WHERE HospitalID = ?";
-      $stmt = mysqli_prepare($conexao, $sql);
-      mysqli_stmt_bind_param($stmt, "s", $id);
-      mysqli_stmt_execute($stmt);
-      $result = mysqli_stmt_get_result($stmt);
-      $hospital = mysqli_fetch_assoc($result);
-      ?>
+
       <div class="esq">
+        <img src="<?php echo $hospital['Foto']; ?>" alt="<?php echo $hospital['Nome'];?>">
+        <h3>Endereço</h3>
+        <p><?php echo $hospital['Endereco']?></p>   
 
       </div>
       <div class="dir">
-
+        <h3>Infraestrututa</h3>
+        <p><?php echo $hospital['Infraestrutura']?></p>     
+        <h3>Atendimento</h3> 
+        <p><?php echo $hospital['Atendimento']?></p>        
+        
+        
       </div>
       
-        <h1><?php echo $hospital['Nome']?></h1>
-        <h3>Atendimento</h3> 
-        <p><?php echo $hospital['Atendimento']?></p>
-        <h3>Infraestrututa</h3>
-        <p><?php echo $hospital['Infraestrutura']?></p>
-        <img src="<?php echo $hospital['Foto']; ?>" alt="<?php echo $hospital['Nome'];?>">
-        <p><?php echo $hospital['Infraestrutura']?></p>
-        <p><?php echo $hospital['Endereco']?></p>
-        
+      <div class="comment-box">
+  <form id="comment-form">
+    <textarea name="comment" id="comment-text" placeholder="Escreva seu comentário aqui..."></textarea>
+    <button type="submit">Enviar Comentário</button>
+  </form>
+
+
+  
         <a href="./index.php">Voltar</a>
     </div>
   </div> 

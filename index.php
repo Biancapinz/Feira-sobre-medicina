@@ -29,7 +29,6 @@ include_once './includes/conexao.php';
 $pagina = 'index';
 include_once './includes/header.php';
 ?>
-<!-- O RESTANTE DO SEU HTML AQUI -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -201,7 +200,6 @@ include_once './includes/header.php';
     <button type="submit">Enviar Comentário</button>
   </form>
   <div id="comments-container">
-    <!-- Os comentários serão exibidos aqui -->
   </div>
 </div>
 

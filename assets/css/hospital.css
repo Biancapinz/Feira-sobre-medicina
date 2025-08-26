@@ -19,7 +19,11 @@ main {
   margin: 30px 0 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.hospTitulo{
+  margin: 10px 0 0 0;
+  padding: 0;
+  text-align: center;
+}
 
 .logotxt h1 a {
   text-decoration: none;
@@ -178,10 +182,22 @@ input[type="radio"] {
   gap: 40px;
   justify-items: center;
   padding: 30px;
-  margin: 40px auto;
+  margin: 5px auto;
   max-width: 1000px;
 }
-
+.l-cards div img{
+  margin-bottom: 20px;
+  width: 100%;
+}
+.l-cards div h3{
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+.l-cards div p{
+  font-size: 14px;
+  line-height: 26px;
+  text-align: justify;
+}
 .c-card {
   background-color: #ced4da;
   border-radius: 0.6rem;

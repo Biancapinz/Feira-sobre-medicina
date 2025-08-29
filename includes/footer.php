@@ -1,9 +1,7 @@
 <footer id="section3">
   <div class="footer-container">
 
-    <div class="footer-logo">
-      <img src="./assets/img/medico.png" alt="Logo" class="logo-hora">
-    </div>
+    
 
     <div class="footer-section">
       <p class="footer-title">Desenvolvedores</p>

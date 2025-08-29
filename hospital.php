@@ -1,200 +1,95 @@
-
-<?php
-// ...restante do código...
-
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
-
-    $sql = "SELECT * FROM usuarios WHERE Email = ?";
-    $stmt = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $email);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $usuario = mysqli_fetch_assoc($result);
-
-    if ($usuario && password_verify($senha, $usuario['senha'])) {
-        $_SESSION['id'] = $usuario['ID'];
-        $_SESSION['nome'] = $usuario['Usuario'];
-        $msg = "Login realizado com sucesso!";
-    } else {
-        $msg = "Email ou senha inválidos!";
-    }
-}
-?>
-
 <?php
 session_start();
 include_once './includes/conexao.php';
 $pagina = 'hospital';
-include_once './includes/header.php';
+include_once './includes/header.php'; 
+
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header("Location: index.php");
+    exit;
+}
+$id = $_GET['id'];
+
+$sql_hospital = "SELECT * FROM hospitais WHERE HospitalID = ?";
+$stmt_hospital = mysqli_prepare($conexao, $sql_hospital);
+mysqli_stmt_bind_param($stmt_hospital, "i", $id);
+mysqli_stmt_execute($stmt_hospital);
+$resultado_hospital = mysqli_stmt_get_result($stmt_hospital);
+$hospital = mysqli_fetch_assoc($resultado_hospital);
+
+if (!$hospital) {
+    header("Location: index.php");
+    exit;
+}
+
+$sql_comentarios = "SELECT c.Texto, c.Data, u.Usuario 
+                    FROM comentarios AS c
+                    JOIN usuarios AS u ON c.IDUsuario = u.ID
+                    WHERE c.IDHospital = ?
+                    ORDER BY c.Data DESC";
+
+$stmt_comentarios = mysqli_prepare($conexao, $sql_comentarios);
+mysqli_stmt_bind_param($stmt_comentarios, "i", $id);
+mysqli_stmt_execute($stmt_comentarios);
+$resultado_comentarios = mysqli_stmt_get_result($stmt_comentarios);
+$comentarios = mysqli_fetch_all($resultado_comentarios, MYSQLI_ASSOC);
+
 ?>
-<!-- O RESTANTE DO SEU HTML AQUI -->
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Acessibilidade Hospitalar</title>
-  <link rel="stylesheet" href="seu-estilo.css">
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background-color: #f5f5f5; }
-    .navbar { background-color: #093b77; padding: 10px; color: white; display: flex; justify-content: space-between; align-items: center; }
-    .navbar-links li { display: inline; margin: 0 10px; }
-    .navbar a { color: white; text-decoration: none; font-weight: bold; }
-    .container { max-width: 1000px; margin: 30px auto; padding: 20px; background: white; border-radius: 8px; }
-    form { margin-top: 30px; }
-    input, textarea, select, button { width: 100%; padding: 10px; margin: 8px 0; }
-    button { background-color: #007BFF; color: white; border: none; cursor: pointer; }
-    .carrossel, .l-cards { margin-bottom: 40px; }
-    .c-card { border: 1px solid #ccc; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
-    .c-card__image img { width: 100%; }
-    .c-card__content { padding: 15px; }
-  </style>
-</head>
-<body>
+<main class="container mt-5 pt-5">
+    
+    <h1 class="hospTitulo"><?php echo htmlspecialchars($hospital['Nome']); ?></h1>
 
-<!-- NAVBAR -->
-
-<main>
-  <!-- Carrossel -->
-  <div class="carrossel">
-    <input type="radio" name="slide" id="slide1" checked>
-    <input type="radio" name="slide" id="slide2">
-    <input type="radio" name="slide" id="slide3">
-
-<main class="container">
-
-  <!-- CARROSSEL -->
-  <div class="carrossel">
-    <input type="radio" name="slide" id="slide1" checked>
-    <input type="radio" name="slide" id="slide2">
-    <input type="radio" name="slide" id="slide3">
-
-    <div class="slides">
-      <div class="slide s1">
-        <img src="Back/img/PHOTO-2023-07-21-13-43-46 (1).jpg.webp" alt="Imagem 1">
-      </div>
-      <div class="slide s2">
-        <img src="Back/img/Hospital-Mae-de-Deus-1-850x560.jpg" alt="Imagem 2">
-      </div>
-      <div class="slide s3">
-        <img src="Back/img/images.jpg" alt="Imagem 3">
-      </div>
+    <div class="info-hospital" style="display: flex; flex-wrap: wrap; gap: 20px;"> 
+        <div class="esq" style="flex: 1; min-width: 300px;">
+            <img src="<?php echo htmlspecialchars($hospital['Foto']); ?>" alt="Foto de <?php echo htmlspecialchars($hospital['Nome']); ?>" style="width: 100%; border-radius: 8px;">
+            <h3 style="margin-top: 15px;">Endereço</h3>
+            <p><?php echo htmlspecialchars($hospital['Endereco']); ?></p>   
+        </div>
+        <div class="dir" style="flex: 2; min-width: 300px;">
+            <h3>Infraestrutura</h3>
+            <p><?php echo nl2br(htmlspecialchars($hospital['Infraestrutura'])); ?></p>     
+            <h3>Atendimento</h3> 
+            <p><?php echo nl2br(htmlspecialchars($hospital['Atendimento'])); ?></p>        
+        </div>
     </div>
-    <div class="navigation">
-      <label for="slide1"></label>
-      <label for="slide2"></label>
-      <label for="slide3"></label>
+      
+    <div class="comment-box" style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
+        <h3>Deixe um Comentário</h3>
+        <?php if (isset($_SESSION['id'])):?>
+            <form id="comment-form" method="POST" action="back/comentario.php">
+                <input type="hidden" name="id_hospital" value="<?php echo $hospital['HospitalID']; ?>">
+                <textarea name="comment" id="comment-text" placeholder="Escreva seu comentário aqui..." required></textarea>
+                <button type="submit">Enviar Comentário</button>
+            </form>
+        <?php else:?>
+            <p>Você precisa <a href="login.php">fazer login</a> para poder comentar.</p>
+        <?php endif; ?>
     </div>
-  </div>
 
-  <!-- CARDS DE HOSPITAIS -->
-  <div class="l-cards">
-    <article class="c-card">
-      <div class="c-card__image">
-        <img src="Back/img/PHOTO-2023-07-21-13-43-46 (1).jpg.webp" alt="Imagem Hospital 1">
-      </div>
-      <div class="c-card__content">
-        <h5>Hospital de Clínicas</h5>
-        <p>Centro de ensino e simulação com ambiente tecnológico e inovador.</p>
-        <a href="Extras 2/especiesnovo 1.html" class="button">Para mais informações</a>
-      </div>
-    </article>
-
-    <article class="c-card">
-      <div class="c-card__image">
-        <img src="Back/img/images.jpg" alt="Imagem Hospital 2">
-      </div>
-      <div class="c-card__content">
-        <h5>Hospital Moinhos de Vento</h5>
-        <p>Infraestrutura de excelência, terapia intensiva e cirurgia robótica.</p>
-        <a href="Extras 2/aguanovo 1.html" class="button">Para mais informações</a>
-      </div>
-    </article>
-
-    <article class="c-card">
-      <div class="c-card__image">
-        <img src="Back/img/Hospital-Mãe-de-Deus-aprimora-fluxo-de-atendimento-e-reduz-espera-na-Emergência.jpg" alt="Imagem Hospital 3">
-      </div>
-      <div class="c-card__content">
-        <h5>Hospital Mãe de Deus</h5>
-        <p>Sala conceito para ortopedia com tecnologia de ponta e acesso biométrico.</p>
-        <a href="Extras 2/queimadanovo 1.html" class="button">Para mais informações</a>
-      </div>
-    </article>
-  </div>
-
-  <!-- LOGIN OU COMENTÁRIO -->
-  <?php if (!isset($_SESSION['id'])): ?>
-    <h2>Login</h2>
-    <form method="post">
-      <label>Email:</label>
-      <input type="email" name="email" required>
-
-      <label>Senha:</label>
-      <input type="password" name="senha" required>
-
-      <button type="submit" name="login">Entrar</button>
-    </form>
-  <?php else: ?>
-    <h2>Olá, <?php echo $_SESSION['nome']; ?>!</h2>
-    <form method="post">
-      <label>Selecione o hospital:</label>
-      <select name="idhospital" required>
-        <?php
-        $hospitais = $conn->query("SELECT HospitalID, Nome FROM hospitais");
-        while ($h = $hospitais->fetch_assoc()) {
-          echo "<option value='{$h['HospitalID']}'>{$h['Nome']}</option>";
-        }
-        ?>
-      </select>
-
-      <label>Comentário:</label>
-      <textarea name="comentario" rows="4" required></textarea>
-
-      <button type="submit" name="comentar">Enviar Comentário</button>
-    </form>
-  <?php endif; ?>
-
-    <div class="navigation">
-      <label for="slide1"></label>
-      <label for="slide2"></label>
-      <label for="slide3"></label>
+    <div class="secao-comentarios-existentes">
+        <h3>Comentários Recentes</h3>
+        <?php if (empty($comentarios)): ?>
+            <p class="sem-comentarios">Ainda não há comentários. Seja o primeiro a avaliar!</p>
+        <?php else:?>
+            <?php foreach ($comentarios as $comentario): ?>
+                <div class="comentario-item">
+                    <div class="comentario-meta">
+                        <span class="comentario-usuario"><?php echo htmlspecialchars($comentario['Usuario']); ?></span>
+                        <span class="comentario-data"><?php echo date('d/m/Y H:i', strtotime($comentario['Data'])); ?></span>
+                    </div>
+                    <p class="comentario-texto"><?php echo nl2br(htmlspecialchars($comentario['Texto'])); ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
-  </div>
-
-  <!-- Cards -->
-  <div class="container mt-5 pt-5">
-    <div class="l-cards"> 
-     <?php 
-      $id = $_GET['id'];
-      $sql = "SELECT * FROM hospitais WHERE HospitalID = ?";
-      $stmt = mysqli_prepare($conexao, $sql);
-      mysqli_stmt_bind_param($stmt, "s", $id);
-      mysqli_stmt_execute($stmt);
-      $result = mysqli_stmt_get_result($stmt);
-      $hospital = mysqli_fetch_assoc($result);
-      ?>
-        <h1><?php echo $hospital['Nome']?></h1>
-        <h3>Atendimento</h3>
-        <p><?php echo $hospital['Atendimento']?></p>
-        <h3>Infraestrututa</h3>
-        <img src="<?php echo $hospital['Foto']; ?>" alt="<?php echo $hospital['Nome'];?>">
-        <p><?php echo $hospital['Infraestrutura']?></p>
-        
-        <a href="./index.php">Voltar</a>
+    
+    <div style="margin-top: 30px;">
+        <a href="./index.php" class="button">← Voltar para a lista de hospitais</a>
     </div>
-  </div> 
+
 </main>
-
-
-<?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>
 
 <?php
 include_once './includes/footer.php';
 ?>
-<!-- RODAPÉ -->
-
-</body>
-</html>

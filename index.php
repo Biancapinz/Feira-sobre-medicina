@@ -1,7 +1,10 @@
 
-<?php
-// ...restante do código...
 
+<?php
+session_start();
+include_once './includes/conexao.php';
+$pagina = 'index';
+include_once './includes/header.php';
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
@@ -23,13 +26,6 @@ if (isset($_POST['login'])) {
 }
 ?>
 
-<?php
-session_start();
-include_once './includes/conexao.php';
-$pagina = 'index';
-include_once './includes/header.php';
-?>
-<!-- O RESTANTE DO SEU HTML AQUI -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -57,7 +53,7 @@ include_once './includes/header.php';
 <!-- NAVBAR -->
 
 <main>
-  <!-- Carrossel -->
+
   <div class="carrossel">
     <input type="radio" name="slide" id="slide1" checked>
     <input type="radio" name="slide" id="slide2">
@@ -139,29 +135,20 @@ include_once './includes/header.php';
     </form>
   <?php else: ?>
     <h2>Olá, <?php echo $_SESSION['nome']; ?>!</h2>
-    <form method="post">
+    
       <label>Selecione o hospital:</label>
       <select name="idhospital" required>
         <?php
-        $hospitais = $conn->query("SELECT HospitalID, Nome FROM hospitais");
-        while ($h = $hospitais->fetch_assoc()) {
-          echo "<option value='{$h['HospitalID']}'>{$h['Nome']}</option>";
+        $hospitais = mysqli_query($conexao, "SELECT HospitalID, Nome FROM hospitais");
+        while ($h = mysqli_fetch_assoc($hospitais)) {
+            echo "<option value='{$h['HospitalID']}'>{$h['Nome']}</option>";
         }
         ?>
       </select>
-
-      <label>Comentário:</label>
-      <textarea name="comentario" rows="4" required></textarea>
-
-      <button type="submit" name="comentar">Enviar Comentário</button>
-    </form>
-  <?php endif; ?>
-
-    <div class="navigation">
-      <label for="slide1"></label>
-      <label for="slide2"></label>
-      <label for="slide3"></label>
-    </div>
+    <?php
+    
+    endif; 
+    ?>
   </div>
 
   <!-- Cards -->
@@ -195,15 +182,6 @@ include_once './includes/header.php';
   </div> 
 </main>
 
-<div class="comment-box">
-  <form id="comment-form">
-    <textarea name="comment" id="comment-text" placeholder="Escreva seu comentário aqui..."></textarea>
-    <button type="submit">Enviar Comentário</button>
-  </form>
-  <div id="comments-container">
-    <!-- Os comentários serão exibidos aqui -->
-  </div>
-</div>
 
 
 <?php if (isset($msg)) echo "<p style='color:blue;'>$msg</p>"; ?>

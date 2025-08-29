@@ -1,4 +1,9 @@
-
+<?php
+session_start();
+include_once './includes/conexao.php';
+$pagina = 'hospital';
+include_once './includes/header.php';
+?>
 <?php
 // ...restante do código...
 
@@ -23,12 +28,7 @@ if (isset($_POST['login'])) {
 }
 ?>
 
-<?php
-session_start();
-include_once './includes/conexao.php';
-$pagina = 'hospital';
-include_once './includes/header.php';
-?>
+
 <!-- O RESTANTE DO SEU HTML AQUI -->
 
 <!DOCTYPE html>
